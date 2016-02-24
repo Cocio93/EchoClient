@@ -45,6 +45,7 @@ public class EchoClient implements Runnable {
             sendName();
         } catch (IOException ex) {
             Logger.getLogger(EchoClient.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
         do {
             String line;
@@ -76,9 +77,13 @@ public class EchoClient implements Runnable {
 
     private void getMessage() {
         String[] cmd = networkIn.nextLine().split("#");
-        if (cmd[0].equalsIgnoreCase("MESSAGE")) {
+        if (cmd[0].equals("MESSAGE")) {
             String msg = cmd[1] + " - " + cmd[2];
             System.out.println(msg);
+        }
+        if (cmd[0].equals("USERS")) {
+            String users = cmd[1];
+            System.out.println("Users online: " + users);
         }
     }
 
